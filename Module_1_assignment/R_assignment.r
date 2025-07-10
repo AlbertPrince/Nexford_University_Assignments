@@ -1,6 +1,6 @@
-first_names_male <- c("John", "Michael", "David", "James", "Robert", "William", "Mark", "Richard", "Thomas", "Steven")
+first_names_male <- c("Kwame", "John", "Kofi", "Antonio", "Tony", "Nii", "Kojo", "Edem", "Bruce", "Steven")
 first_names_female <- c("Mary", "Linda", "Patricia", "Jennifer", "Elizabeth", "Susan", "Jessica", "Sarah", "Karen", "Nancy")
-last_names <- c("Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Martinez", "Hernandez")
+last_names <- c("Wayne", "Banner", "Stark", "Brown", "Jones", "Mensah", "Larteh", "Agbodza", "Lartey", "Gbotsu")
 
 n_workers <- 400
 genders <- sample(c("Male", "Female"), n_workers, replace = TRUE)

@@ -1,8 +1,8 @@
 import random
 
-first_names_male = ["John", "Michael", "David", "James", "Robert", "William", "Mark", "Richard", "Thomas", "Steven"]
-first_names_female = ["Mary", "Linda", "Patricia", "Jennifer", "Elizabeth", "Susan", "Jessica", "Sarah", "Karen", "Nancy"]
-last_names = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Martinez", "Hernandez"]
+first_names_male = ["Kwesi", "Stiles", "Peter", "David", "James", "Stiles", "Scott", "Richard", "Thomas", "Bruce"]
+first_names_female = ["Afia", "Adjeley", "Leticia", "Wendy", "Josephine", "Blessing", "Holly", "Sarah", "Karen", "Nancy"]
+last_names = ["Nunoo", "Lartey", "Anokye", "Parker", "Quill", "Mensah", "Gbotsu", "Wayne", "McCall", "Stilinski"]
 
 workers = []
 for i in range(1, 401):
