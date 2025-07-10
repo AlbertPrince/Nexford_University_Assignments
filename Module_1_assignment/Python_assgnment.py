@@ -4,7 +4,6 @@ first_names_male = ["John", "Michael", "David", "James", "Robert", "William", "M
 first_names_female = ["Mary", "Linda", "Patricia", "Jennifer", "Elizabeth", "Susan", "Jessica", "Sarah", "Karen", "Nancy"]
 last_names = ["Smith", "Johnson", "Williams", "Brown", "Jones", "Garcia", "Miller", "Davis", "Martinez", "Hernandez"]
 
-# Generate 400 workers with random names
 workers = []
 for i in range(1, 401):
     gender = random.choice(["Male", "Female"])
@@ -23,7 +22,6 @@ for i in range(1, 401):
         "salary": salary
     })
 
-# Generate payment slips for each worker
 for worker in workers:
     try:
         level = ""
@@ -42,7 +40,3 @@ for worker in workers:
         print(f"Type error in worker data: {e}")
     except Exception as e:
         print(f"An unexpected error occurred: {e}")
-
-# Example: print all workers
-# for worker in workers[:]:
-#     print(worker)
