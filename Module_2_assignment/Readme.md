@@ -7,8 +7,7 @@ This project processes employee salary data using Python and R.
 - Open the `SalaryDataProcessor.ipynb` notebook.
 - Run all cells to:
   - Import the data
-  - Use `get_employee_details_and_zip("Employee Name")` to view data
-  - Use `export_zipped_employee_profile("Employee Name")` to create a zipped CSV
+  - Use `get_employee_details_and_zip("Employee Name")` to export employee data to CSV and zip it. 
 
 The ZIP file will be saved as `Employee_Profile.zip`.
 
