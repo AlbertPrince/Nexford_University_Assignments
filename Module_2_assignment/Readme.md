@@ -2,7 +2,7 @@
 
 This project processes employee salary data using Python and R.
 
-## 🐍 Python InstructionsS
+## 🐍 Python Instructions
 
 - Open the `SalaryDataProcessor.ipynb` notebook.
 - Run all cells to:
@@ -23,4 +23,4 @@ Make sure the ZIP file is in the same directory as the R script.
 - `SalaryDataProcessor.ipynb`: Jupyter notebook with Python code
 - `unzip_and_read.R`: R script to unzip and read data
 - `Employee_Profile.zip`: Zipped folder with employee CSV
-- `README.md`: Instructions for usage
+- `Readme.md`: Instructions for usage
