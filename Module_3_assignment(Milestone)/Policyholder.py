@@ -36,6 +36,20 @@ class Policyholder:
         self.payments.append(payment)
         return f"Payment of {payment.amount} has been added for policyholder {self.name}."
     
+    def remove_product(self, product):
+        if product in self.products:
+            self.products.remove(product)
+            return f"Product {product.product_name} has been removed from policyholder {self.name}."
+        else:
+            return f"Product {product.product_name} not found for policyholder {self.name}."
+        
+    def remove_payment(self, payment):
+        if payment in self.payments:
+            self.payments.remove(payment)
+            return f"Payment of {payment.amount} has been removed for policyholder {self.name}."
+        else:
+            return f"Payment of {payment.amount} not found for policyholder {self.name}."
+    
     def display_products(self):
         return [product.display_info() for product in self.products]
 
