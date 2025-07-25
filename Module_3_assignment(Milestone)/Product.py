@@ -25,3 +25,7 @@ class Policy_Product:
     
     def delete_product(self):
         return f"Product {self.product_name} with ID {self.product_id} has been deleted."
+
+    def suspend_product(self):
+        self.status = Status.SUSPENDED
+        return f"Product {self.product_name} has been suspended."

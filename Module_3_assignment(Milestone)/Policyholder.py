@@ -32,6 +32,8 @@ class Policyholder:
         self.products.append(product)
         return f"Product {product.product_name} has been added to policyholder {self.name}."
     
+    
+    
     def add_payment(self, payment):
         self.payments.append(payment)
         return f"Payment of {payment.amount} has been added for policyholder {self.name}."
