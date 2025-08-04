@@ -15,6 +15,8 @@ file['country'] = file['country'].fillna('Unknown')
 file_cleaned = file.dropna(subset=['rating', 'date_added'])
 
 file = file_cleaned
+file.to_csv('Netflix_file_cleaned.csv', index=False)
+
 print("number of rows after removing missing values: ", len(file))
 print("number of missing values in each column after cleaning:")
 print(file.isnull().sum())
