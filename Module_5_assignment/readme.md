@@ -17,7 +17,7 @@ This project applies **Principal Component Analysis (PCA)** to the breast cancer
 ### Files
 
 * **cancer\_pca\_assignment.py** — Main code with PCA and Logistic Regression implementation.
-* **README.md** — This documentation file.
+* **readme.md** — This documentation file.
 
 ---
 
