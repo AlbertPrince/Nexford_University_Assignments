@@ -10,16 +10,14 @@ This project applies **Principal Component Analysis (PCA)** to the breast cancer
 
 1. Implement PCA to identify essential variables.
 2. Reduce dataset dimensionality to **2 components (PC1 & PC2)**.
-3. (Optional) Train and evaluate Logistic Regression using the reduced dataset.
+3. Train and evaluate Logistic Regression using the reduced dataset.
 
 ---
 
 ### Files
 
-* **breast\_cancer\_pca.py** — Main code with PCA and Logistic Regression implementation.
+* **cancer\_pca\_assignment.py** — Main code with PCA and Logistic Regression implementation.
 * **README.md** — This documentation file.
-
-*(If you're submitting a Jupyter Notebook version, use `breast_cancer_pca.ipynb` instead.)*
 
 ---
 
@@ -34,10 +32,9 @@ pip install pandas matplotlib scikit-learn pyparsing
 2. **Run the script**:
 
 ```bash
-python breast_cancer_pca.py
+python cancer_pca_assignement.py
 ```
 
-*(Or open in Jupyter Notebook and run all cells if using `.ipynb`)*
 
 3. **Expected Output**:
 
