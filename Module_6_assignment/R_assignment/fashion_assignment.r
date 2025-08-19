@@ -39,12 +39,25 @@ history <- model |>
 class_names <- c("T-shirt/top", "Trouser", "Pullover", "Dress", "Coat",
                  "Sandal", "Shirt", "Sneaker", "Bag", "Ankle boot")
 
-x_subset <- as.array(x_test)[1:2,,,]
+save_dir <- file.path(getwd(), "Module_6_assignment", "R_assignment")
+if (!dir.exists(save_dir)) {
+  dir.create(save_dir, recursive = TRUE)
+}
+
+x_subset <- x_test[1:2,,, , drop=FALSE]
 predictions <- model |> predict(x_subset)
 
 for (i in 1:2) {
   pred_label <- which.max(predictions[i,]) - 1
   true_label <- y_test[i]
-  cat(sprintf("Image %d → Predicted: %s, True: %s\n",
-              i-1, class_names[pred_label+1], class_names[true_label+1]))
+
+  png(file.path(save_dir, paste0("prediction_", i-1, ".png")))
+  img <- x_test[i,,,1]
+  image(1:28, 1:28, img[,28:1], col=gray.colors(255), axes=FALSE,
+        main=paste0("Predicted: ", class_names[pred_label+1],
+                    "\nTrue: ", class_names[true_label+1]))
+  dev.off()
 }
+
+model$save(file.path(save_dir, "fashion_cnn.keras"))
+write.table(predictions, file=file.path(save_dir, "predictions.txt"))
