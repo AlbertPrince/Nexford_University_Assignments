@@ -1,8 +1,11 @@
+import os
 import tensorflow as tf
 from keras.datasets import fashion_mnist
 from keras import models, layers
 import matplotlib.pyplot as plt
 import numpy as np
+
+save_dir = os.path.dirname(os.path.abspath(__file__))
 
 (x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
 
@@ -37,8 +40,8 @@ for i in range(2):
     plt.imshow(x_test[i].reshape(28, 28), cmap='gray')
     plt.title(f"Predicted: {class_names[pred_label]}, True: {class_names[true_label]}")
     plt.axis('off')
-    plt.savefig(f"prediction_{i}.png")
+    plt.savefig(os.path.join(save_dir, f"prediction_{i}.png"))
     plt.show()
 
-model.save("fashion_cnn.h5")
-np.savetxt("predictions.txt", predictions[:2])
+model.save(os.path.join(save_dir, "fashion_cnn.h5"))
+np.savetxt(os.path.join(save_dir, "predictions.txt"), predictions[:2])
