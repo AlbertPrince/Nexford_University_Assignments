@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Income & Expenses Survey</title>
+</head>
+<body>
+    <h1>Income & Expenses Survey</h1>
+    <form method="POST" action="/submit">
+        <label>Name: <input type="text" name="name" required></label><br><br>
+        <label>Age: <input type="number" name="age" required></label><br><br>
+
+        <label>Gender: 
+            <select name="gender" required>
+                <option value="">--Select--</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </label><br><br>
+
+        <label>Total Income: <input type="number" name="income" required></label><br><br>
+
+        <h3>Expenses</h3>
+        <label><input type="checkbox" name="expense_utilities"> Utilities 
+            <input type="number" name="amount_utilities" placeholder="Amount">
+        </label><br>
+        <label><input type="checkbox" name="expense_entertainment"> Entertainment 
+            <input type="number" name="amount_entertainment" placeholder="Amount">
+        </label><br>
+        <label><input type="checkbox" name="expense_school"> School Fees 
+            <input type="number" name="amount_school" placeholder="Amount">
+        </label><br>
+        <label><input type="checkbox" name="expense_shopping"> Shopping 
+            <input type="number" name="amount_shopping" placeholder="Amount">
+        </label><br>
+        <label><input type="checkbox" name="expense_healthcare"> Healthcare 
+            <input type="number" name="amount_healthcare" placeholder="Amount">
+        </label><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
