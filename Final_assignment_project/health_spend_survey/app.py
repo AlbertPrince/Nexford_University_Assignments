@@ -4,10 +4,15 @@ from wtforms import IntegerField, SelectField, DecimalField, StringField, Submit
 from wtforms.validators import DataRequired, NumberRange, InputRequired
 from flask_bootstrap import Bootstrap5
 from decimal import Decimal
+from pymongo import MongoClient
 
 app = Flask(__name__)
 app.secret_key = "change_this_secret_key"  # required for CSRF
 bootstrap = Bootstrap5(app)
+
+client = MongoClient("mongodb+srv://survey_user:StrongPass123@healthsurverycluster.mdxv8kp.mongodb.net/?retryWrites=true&w=majority&appName=HealthSurveryCluster")
+db = client["survey_db"]
+collection = db["responses"]
 
 EXPENSE_CATEGORIES = ["Utilities", "Entertainment", "School Fees", "Shopping", "Healthcare"]
 
@@ -43,12 +48,13 @@ def index():
             "name": form.name.data,
             "age": form.age.data,
             "gender": form.gender.data,
-            "income": form.income.data,
-            "expenses": {cat: getattr(form, cat).data for cat in EXPENSE_CATEGORIES}
+            "income": float(form.income.data) if form.income.data is not None else 0.0,
+            "expenses": {cat: float(getattr(form, cat).data) for cat in EXPENSE_CATEGORIES}
         }
-        print(data)  # for now just print to console
-        return "<h3>Form submitted successfully!</h3>"
+        collection.insert_one(data)  # Save to MongoDB
+        return "<h3>Form submitted successfully and stored in MongoDB!</h3>"
     return render_template("form.html", form=form)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
