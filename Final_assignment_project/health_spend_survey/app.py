@@ -1,3 +1,5 @@
+import datetime
+import os
 from flask import Flask, render_template, request
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, SelectField, DecimalField, StringField, SubmitField
@@ -5,6 +7,7 @@ from wtforms.validators import DataRequired, NumberRange, InputRequired
 from flask_bootstrap import Bootstrap5
 from decimal import Decimal
 from pymongo import MongoClient
+from user import User
 
 from flask import send_file
 import csv
@@ -75,30 +78,59 @@ def index():
 @app.route("/export")
 def export_csv():
     all_responses = list(collection.find())
-
+    
     output = io.StringIO()
     writer = csv.writer(output)
-
+    
     header = ["name", "age", "gender", "income"] + EXPENSE_CATEGORIES
     writer.writerow(header)
-
+    
     for doc in all_responses:
-        row = [
-            doc.get("name"),
-            doc.get("age"),
-            doc.get("gender"),
-            doc.get("income")
-        ] + [doc["expenses"].get(cat, 0) for cat in EXPENSE_CATEGORIES]
-        writer.writerow(row)
-
+        user = User(
+            name=doc.get("name"),
+            age=doc.get("age"),
+            gender=doc.get("gender"),
+            income=doc.get("income"),
+            expenses=doc.get("expenses", {})
+        )
+        writer.writerow([user.to_dict(EXPENSE_CATEGORIES)[col] for col in header])
+    
     output.seek(0)
-
+    
     return send_file(
         io.BytesIO(output.getvalue().encode()),
         mimetype="text/csv",
         as_attachment=True,
         download_name="survey_data.csv"
     )
+
+
+@app.route("/save_csv")
+def save_csv():
+    submissions = list(collection.find())
+    
+    os.makedirs("data", exist_ok=True)
+    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    filepath = os.path.join("data", f"survey_data_{timestamp}.csv")
+    
+    fieldnames = ["name", "age", "gender", "income"] + EXPENSE_CATEGORIES
+    
+    with open(filepath, mode="w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        
+        for entry in submissions:
+            user = User(
+                name=entry.get("name"),
+                age=entry.get("age"),
+                gender=entry.get("gender"),
+                income=entry.get("income"),
+                expenses=entry.get("expenses", {})
+            )
+            writer.writerow(user.to_dict(EXPENSE_CATEGORIES))
+    
+    return f"<h3>CSV saved successfully at {filepath}</h3>"
+
 
 
 if __name__ == "__main__":
