@@ -1,0 +1,16 @@
+venv/
+.env/
+
+data/
+charts/
+*.csv
+
+__pycache__/
+*.pyc
+.DS_Store
+
+.idea/
+.vscode/
+
+.git/
+.gitignore
