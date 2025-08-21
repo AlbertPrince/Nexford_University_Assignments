@@ -1,33 +1,44 @@
 from flask import Flask, render_template, request
+from flask_wtf import FlaskForm
+from wtforms import IntegerField, SelectField, DecimalField, StringField, SubmitField
+from wtforms.validators import DataRequired, NumberRange, InputRequired
+from flask_bootstrap import Bootstrap5
 
 app = Flask(__name__)
+app.secret_key = "change_this_secret_key"  # required for CSRF
+bootstrap = Bootstrap5(app)
 
-@app.route("/")
-def home():
-    return render_template("form.html")
-
-@app.route("/submit", methods=["POST"])
-def submit():
-    name = request.form.get("name")
-    age = request.form.get("age")
-    gender = request.form.get("gender")
-    income = request.form.get("income")
-
-    expenses = {}
-    categories = ["utilities", "entertainment", "school", "shopping", "healthcare"]
-    for category in categories:
-        if request.form.get(f"expense_{category}"):
-            amount = request.form.get(f"amount_{category}", 0)
-            expenses[category] = float(amount) if amount else 0.0
+EXPENSE_CATEGORIES = ["Utilities", "Entertainment", "School Fees", "Shopping", "Healthcare"]
 
 
+# ---- Define the form ----
+class SurveyForm(FlaskForm):
+    name = StringField("Name", validators=[InputRequired()])
+    age = IntegerField("Age", validators=[DataRequired(), NumberRange(min=0, max=120)])
+    gender = SelectField("Gender", choices=[("Male", "Male"), ("Female", "Female"), ("Other", "Other")])
+    income = DecimalField("Total Income ($)", validators=[DataRequired()])
+    # We'll handle expenses dynamically later
+    submit = SubmitField("Submit")
 
-    print("New submission: ")
-    print(f"Name: {name}, Age: {age}, Gender: {gender}, Income: {income}, Expenses: {expenses}")
+# ---- Define routes ----
+@app.route("/", methods=["GET", "POST"])
+def index():
+    form = SurveyForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        age = form.age.data
+        gender = form.gender.data
+        income = form.income.data
+        
+        expenses = {}
+        for category in EXPENSE_CATEGORIES:
+            amount = request.form.get(category)
+            if amount:
+                expenses[category] = amount
 
-    return f"<h2> Thanks for submitting, {gender} aged {age}!</h2>"
-
-
+        print(f"Name={name}, Age={age}, Gender={gender}, Income={income}, Expenses={expenses}")
+        return "<h3>Form submitted successfully!</h3>"
+    return render_template("form.html", form=form, categories=EXPENSE_CATEGORIES)
 
 if __name__ == "__main__":
     app.run(debug=True)
