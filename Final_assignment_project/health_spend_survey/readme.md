@@ -102,8 +102,15 @@ Initialize app: eb init -p python-3.11 flask-survey-app --region us-east-2
 
 Create environment: eb create flask-env
 
-Deploy updates: eb deploy
+Deployment Status
 
-Open app: eb open
+Code is fully deployment-ready.
 
-Issue with aws-deployment as my aws account has an issue and would take some days to resolve.
+AWS deployment pending due to account verification issues.
+
+Once AWS is activated, simply run:
+
+eb deploy
+
+
+to push the app live.
