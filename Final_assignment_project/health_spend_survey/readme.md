@@ -105,3 +105,5 @@ Create environment: eb create flask-env
 Deploy updates: eb deploy
 
 Open app: eb open
+
+Issue with aws-deployment as my aws account has an issue and would take some days to resolve.
